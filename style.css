@@ -1,0 +1,29 @@
+#btnSubmit {
+    margin-top: 1%;
+}
+
+
+.container {
+    width: 70%;
+    margin: 0 auto;
+    background-color: rgb(243, 234, 234);
+    padding: 2%;
+    text-align: center;
+    margin-top: 3%;
+}
+
+form form div {
+    margin-top: 1%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 18px;
+}
+
+th,
+td {
+    border: 1px solid #343a40;
+
+}

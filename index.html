@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <form action="">
+        <div>
+          <label for="kind">Вид</label>
+          <input required type="text" name="kind" id="kind" />
+        </div>
+
+        <div>
+          <label for="ailitNight">Возможность видеть ночью</label>
+          <input type="checkbox" name="ailitNight" id="ailitNight" />
+        </div>
+        <div>
+          <label for="heirs"></label>
+
+          <select required name="heirs" id="select">
+            <option value="" disabled>Выберите наследника</option>
+            <option value="tiger">Tiger</option>
+            <option value="cougar">Cougar</option>
+          </select>
+        </div>
+        <button class="button" id="btnSubmit" type="submit">Создать</button>
+      </form>
+    </div>
+    <div class="container">
+      <table id="table">
+        <thead>
+          <td>tail</td>
+          <td>abilityHear</td>
+          <td>nightWayOfLife</td>
+          <td>domain</td>
+          <td>kingdom</td>
+          <td>type</td>
+          <td>skills</td>
+          <td>genus</td>
+          <td>teeth</td>
+          <td>food</td>
+          <td>kind</td>
+          <td>ailitNight</td>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <script src="./scripts/script.js"></script>
+  </body>
+</html>
