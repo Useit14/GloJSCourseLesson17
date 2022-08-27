@@ -71,6 +71,12 @@ class Cougar extends Feline {
   }
 }
 
+const initClass = () => {
+  essences.forEach((essence, index) => {
+    essence[index] = essence.kind == "Tig" ? new Tiger() : new Cougar();
+  });
+};
+
 const addClass = (e) => {
   e.preventDefault();
   const selectedIndex = select.options.selectedIndex;
@@ -98,10 +104,11 @@ const addClass = (e) => {
 const insertIntoTable = () => {
   if (JSON.parse(localStorage.getItem("essences"))) {
     essences = JSON.parse(localStorage.getItem("essences"));
+    initClass();
     const tbody = table.querySelector("tbody");
     const theadTd = table.querySelector("thead").querySelectorAll("td");
     tbody.innerHTML = "";
-    essences.forEach((essence) => {
+    essences.forEach((essence, index) => {
       const tr = document.createElement("tr");
       theadTd.forEach((td) => {
         if (essence[td.textContent] !== undefined) {
@@ -111,7 +118,6 @@ const insertIntoTable = () => {
         }
       });
       const button = document.createElement("button");
-      console.log(essence.sayMeow());
       // button.addEventListener("click", essence.sayMeow());
       tr.append(button);
       tbody.append(tr);
@@ -127,3 +133,6 @@ form.addEventListener("submit", (e) => {
 if (JSON.parse(localStorage.getItem("essences"))) {
   insertIntoTable();
 }
+
+const test = new Tiger();
+test.sayMeow();
