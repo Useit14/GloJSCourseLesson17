@@ -27,13 +27,11 @@ class Feline {
     console.log("Meow");
   }
 
-  delete() {
-    essences.forEach((essence) => {
-      if (essence === this) {
-        essences.slice(index, 1);
-      }
+  delete(index) {
+    const newEssences = essences.filter((value, ind, arr) => {
+      return index != ind;
     });
-    localStorage.setItem("essences", JSON.stringify(essences));
+    localStorage.setItem("essences", JSON.stringify(newEssences));
   }
 }
 
@@ -71,9 +69,9 @@ class Cougar extends Feline {
   }
 }
 
-const initClass = () => {
+const initClass = (essences) => {
   essences.forEach((essence, index) => {
-    essence[index] = essence.kind == "Tig" ? new Tiger() : new Cougar();
+    essences[index] = essence.genus === "Panthers" ? new Tiger() : new Cougar();
   });
 };
 
@@ -104,7 +102,7 @@ const addClass = (e) => {
 const insertIntoTable = () => {
   if (JSON.parse(localStorage.getItem("essences"))) {
     essences = JSON.parse(localStorage.getItem("essences"));
-    initClass();
+    initClass(essences);
     const tbody = table.querySelector("tbody");
     const theadTd = table.querySelector("thead").querySelectorAll("td");
     tbody.innerHTML = "";
@@ -118,7 +116,11 @@ const insertIntoTable = () => {
         }
       });
       const button = document.createElement("button");
-      // button.addEventListener("click", essence.sayMeow());
+      button.textContent = "Delete";
+      button.addEventListener("click", () => {
+        essence.delete(index);
+        insertIntoTable();
+      });
       tr.append(button);
       tbody.append(tr);
     });
@@ -133,6 +135,3 @@ form.addEventListener("submit", (e) => {
 if (JSON.parse(localStorage.getItem("essences"))) {
   insertIntoTable();
 }
-
-const test = new Tiger();
-test.sayMeow();
