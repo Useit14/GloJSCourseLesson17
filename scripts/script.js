@@ -15,14 +15,6 @@ class Feline {
     this.skills = ["growl", "jump", "play", "meow"];
   }
 
-  get skillsArr() {
-    return this._skills;
-  }
-
-  set skillsArr(str) {
-    this.skills.push(str);
-  }
-
   sayMeow() {
     console.log("Meow");
   }
@@ -37,41 +29,78 @@ class Feline {
 
 class Tiger extends Feline {
   constructor(
+    kind,
+    abilityNight,
     tail,
     abilityHear,
     nightWayOfLife,
     domain,
     kingdom,
-    type,
     skills
   ) {
-    super(tail, abilityHear, nightWayOfLife, domain, kingdom, type, skills);
-    this.genus = "Panthers";
-    this.teeth = 30;
+    super(
+      kind,
+      abilityNight,
+      tail,
+      abilityHear,
+      nightWayOfLife,
+      domain,
+      kingdom,
+      skills
+    );
+    super.genus = "Panthers";
+    super.teeth = 30;
+    super.kind = kind;
+    super.abilityNight = abilityNight;
     super.skillsArr = "creeping";
   }
 }
 
 class Cougar extends Feline {
   constructor(
+    kind,
+    abilityNight,
     tail,
     abilityHear,
     nightWayOfLife,
     domain,
     kingdom,
-    type,
     skills
   ) {
-    super(tail, abilityHear, nightWayOfLife, domain, kingdom, type, skills);
-    this.food = "deer";
-    this.genus = "Cougars";
+    super(
+      kind,
+      abilityNight,
+      tail,
+      abilityHear,
+      nightWayOfLife,
+      domain,
+      kingdom,
+      skills
+    );
+    super.food = "deer";
+    super.genus = "Cougars";
+    super.kind = kind;
+    super.abilityNight = abilityNight;
     super.skillsArr = "climbs";
   }
 }
 
 const initClass = (essences) => {
   essences.forEach((essence, index) => {
-    essences[index] = essence.genus === "Panthers" ? new Tiger() : new Cougar();
+    essences[index] =
+      essence.genus === "Panthers"
+        ? new Tiger(
+            essence.kind,
+            essence.abilityNight,
+            essence.genus,
+            essence.food
+          )
+        : new Cougar(
+            essence.kind,
+            essence.abilityNight,
+            essence.genus,
+            essence.food
+          );
   });
 };
 
@@ -79,22 +108,25 @@ const addClass = (e) => {
   e.preventDefault();
   const selectedIndex = select.options.selectedIndex;
   const selectedElem = select.options[selectedIndex].value;
+  let kind = "";
+  let abilityNight = false;
   let obj;
-  switch (selectedElem) {
-    case "tiger":
-      obj = new Tiger();
-      break;
-    case "cougar":
-      obj = new Cougar();
-      break;
-  }
   inputs.forEach((input) => {
     if (input.type != "checkbox") {
-      obj[input.name] = input.value;
+      kind = input.value;
     } else {
-      obj[input.name] = input.checked;
+      abilityNight = input.checked;
     }
   });
+  switch (selectedElem) {
+    case "tiger":
+      obj = new Tiger(kind, abilityNight);
+      break;
+    case "cougar":
+      obj = new Cougar(kind, abilityNight);
+      break;
+  }
+
   essences.push(obj);
   localStorage.setItem("essences", JSON.stringify(essences));
 };
